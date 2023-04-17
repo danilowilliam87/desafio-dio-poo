@@ -7,78 +7,86 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Assunto assunto = new Assunto("ARTIGO");
-        Assunto assunto1 = new Assunto("SUBSTANTIVO");
-        Assunto assunto2 = new Assunto("ADJETIVO");
-        Questao questao = new Questao();
-        Questao questao1 = new Questao();
-        Questao questao2 = new Questao();
+        Candidato candidato1 = new Candidato();
+        candidato1.setNome("Canidato #1");
 
-        Candidato  candidato = new Candidato();
-        candidato.setNome("candidato 1");
-        Prova prova = new Prova();
+        Candidato candidato2 = new Candidato();
+        candidato2.setNome("Canidato #2");
 
-        Disciplina disciplina = new Disciplina("PORTUGUES");
-        Set<Assunto> assuntosDisciplina = new HashSet<>();
-        assuntosDisciplina.add(new Assunto("ARTIGO"));
-        assuntosDisciplina.add(new Assunto("SUBSTANTIVO"));
-        assuntosDisciplina.add(new Assunto("PRONOME"));
-        disciplina.setAssuntos(assuntosDisciplina);
+
+        Disciplina disciplina = new Disciplina();
+        disciplina.setTitulo("MATEMATICA");
 
         Map<Integer, String> alternativas1 = new HashMap<>();
         Map<Integer, String> alternativas2 = new HashMap<>();
-        Map<Integer, String> alternativas3 = new HashMap<>();
 
-        alternativas1.put(1, "Como aponta o relatório da Unicef de 2021 sobre o impacto da covid-19 na saúde mental [...]” (3º§) Como aponta relatório da Unicef de 2021 sobre o impacto da covid-19 na saúde mental [...]");
-        alternativas1.put(2, "No noticiário de todo o país, explodiu a ocorrência de casos de discriminação e bullying [...]” (3º§) No noticiário de todo país, explodiu a ocorrência de casos de discriminação e bullying [...]");
-        alternativas1.put(3, "[...] se bebermos da fonte mais preciosa, acolhendo as ideias de quem vive na pele os danos do distanciamento social.” (8º§) [...]se bebermos da fonte mais preciosa, acolhendo as ideias de quem vive na pele danos do distanciamento social");
-        alternativas1.put(4, "Cada tipo de violência demanda respostas diversas (...) como evidenciou o vasto levantamento produzido pela consultoria Vozes da Educação.” (4º§) Cada tipo de violência demanda respostas diversas (...) como evidenciou vasto levantamento produzido pela consultoria Vozes da Educação.");
-        Integer alternaticaCerta = 1;
+        //alternativas1.put(1, "QUANTO É 15% DE R$ 200,00 ");
+        String texto = "quanto é 10% de R$ 300,00".toUpperCase();
+        alternativas1.put(1, "R$ 20,00");
+        alternativas1.put(2, "R$ 22,00");
+        alternativas1.put(3, "R$ 39,00");
+        alternativas1.put(4, "R$ 30,00");
 
-        alternativas2.put(1, "as – sem artigo – as");
-        alternativas2.put(2, "as – as – sem artigo");
-        alternativas2.put(3, "sem artigo – as – as");
-        alternativas2.put(4, "sem artigo – sem artigo – as");
-        Integer alternaticaCerta2 = 4;
+        String texto2 = "quanto é 10% de R$ 100,00".toUpperCase();
+        alternativas2.put(1, "R$ 20,00");
+        alternativas2.put(2, "R$ 10,00");
+        alternativas2.put(3, "R$ 39,00");
+        alternativas2.put(4, "R$ 30,00");
 
+        Questao questao = new Questao();
+        Questao questao1 = new Questao();
 
-        alternativas3.put(1, "as – sem artigo – as");
-        alternativas3.put(2, "as – as – sem artigo");
-        alternativas3.put(3, "sem artigo – as – as");
-        alternativas3.put(4, "sem artigo – sem artigo – as");
-        Integer alternaticaCerta3 = 4;
-
-        questao.setAssunto("ARTIGO");
-        questao.setTextoDaQuestao("Em qual dos seguintes fragmentos a supressão do artigo definido o(s) destacado altera sensivelmente o sentido do enunciado?");
+        questao.setValor(1000);
+        questao.setTextoDaQuestao(texto);
         questao.setAlternativas(alternativas1);
-        questao.setDisciplina(disciplina);
-        questao.setAlternativaCorreta(1);
-        questao.setAlternativaEscolhida(1);
-        questao.setValor(100);
+        questao.setAlternativaCorreta(4);
+        questao.setNumero(100);
 
 
-
-        questao1.setAssunto("ARTIGO");
-        questao1.setTextoDaQuestao("Considerando o emprego correto dos artigos, assinale a alternativa que preenche, correta e respectivamente, as lacunas pontilhadas nas linhas 09, 14 e 17. Onde não houver a ocorrência de artigo, considere a expressão sem artigo");
+        questao1.setValor(1000);
+        questao1.setTextoDaQuestao(texto2);
         questao1.setAlternativas(alternativas2);
-        questao1.setDisciplina(disciplina);
-        questao1.setAlternativaCorreta(4);
-        questao1.setAlternativaEscolhida(1);
-        questao1.setValor(100);
+        questao1.setAlternativaCorreta(2);
+        questao1.setNumero(200);
 
+        Resposta resposta = new Resposta();
+        Resposta resposta1 = new Resposta();
+        Resposta resposta2 = new Resposta();
+        Resposta resposta3 = new Resposta();
 
+        resposta.setNumeroResposta(4);
+        resposta.setQuestao(questao);
 
-        Set<Questao> questaos = new HashSet<>();
-        questaos.add(questao);
-        questaos.add(questao1);
+        resposta1.setNumeroResposta(2);
+        resposta1.setQuestao(questao1);
 
-        prova.setQuestoes(questaos);
+        resposta2.setNumeroResposta(4);
+        resposta2.setQuestao(questao);
 
-        candidato.setProva(prova);
+        resposta3.setNumeroResposta(1);
+        resposta3.setQuestao(questao1);
 
+        Prova prova = new Prova();
+        Prova prova1 = new Prova();
 
+        Set<Resposta> respostas1 = new HashSet<>();
+        Set<Resposta> respostas2 = new HashSet<>();
+        respostas1.add(resposta);
+        respostas1.add(resposta1);
+        respostas2.add(resposta2);
+        respostas2.add(resposta3);
 
-        System.out.println("Pontuação total = " + candidato.calcularPontuacao());
+        prova.setCandidato(candidato1);
+        prova.setRespostas(respostas1);
+
+        prova1.setCandidato(candidato2);
+        prova1.setRespostas(respostas2);
+
+        prova.setTitulo("avaliação de matematica");
+        prova1.setTitulo("avaliação de matematica");
+
+        System.out.println("Pontuação de candidato #1 : " + prova.calcularPontuacao());
+        System.out.println("Pontuação de candidato #2 : " + prova1.calcularPontuacao());
 
 
     }

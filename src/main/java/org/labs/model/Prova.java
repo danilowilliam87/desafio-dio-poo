@@ -7,7 +7,8 @@ import java.util.Set;
 public class Prova {
 
     private String titulo;
-    private Set<Questao> questoes = new HashSet<>();
+    private Candidato candidato;
+    private Set<Resposta> respostas = new HashSet<>();
 
     public String getTitulo() {
         return titulo;
@@ -17,32 +18,36 @@ public class Prova {
         this.titulo = titulo;
     }
 
-    public Set<Questao> getQuestoes() {
-        return questoes;
+    public Candidato getCandidato() {
+        return candidato;
     }
 
-    public void setQuestoes(Set<Questao> questoes) {
-        this.questoes = questoes;
+    public void setCandidato(Candidato candidato) {
+        this.candidato = candidato;
+    }
+
+    public Set<Resposta> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(Set<Resposta> respostas) {
+        this.respostas = respostas;
+    }
+
+    public double calcularPontuacao(){
+        return this.respostas
+                .stream()
+                .filter(resposta -> resposta.getNumeroResposta().equals(resposta.getNumeroResposta()))
+                .mapToDouble(pontos -> pontos.obterPontoDaQuestao())
+                .sum();
     }
 
     @Override
     public String toString() {
         return "Prova{" +
                 "titulo='" + titulo + '\'' +
-                ", questoes=" + questoes +
+                ", candidato=" + candidato +
+                ", respostas=" + respostas +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Prova prova = (Prova) o;
-        return Objects.equals(titulo, prova.titulo) && Objects.equals(questoes, prova.questoes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(titulo, questoes);
     }
 }
