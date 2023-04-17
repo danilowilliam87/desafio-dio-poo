@@ -2,6 +2,7 @@ package org.labs.model;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -10,15 +11,27 @@ public class Dev {
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<Conteudo>();
     private Set<Conteudo> conteudosFinalizados = new LinkedHashSet<Conteudo>();
 
-    public void increverBootcamp(Bootcamp bootcamp){
-
+    public void inscreverBootcamp(Bootcamp bootcamp){
+         this.conteudosInscritos.addAll(bootcamp.getConteudos());
+         bootcamp.getDevsIncritos().add(this);
     }
 
-    public void progredirBootcamp(Bootcamp bootcamp){
-
+    public void progredirBootcamp(){
+        Optional<Conteudo> conteudo =  this.conteudosInscritos.stream().findFirst();
+         if(conteudo.isPresent()) {
+             this.conteudosFinalizados.add(conteudo.get());
+             this.conteudosInscritos.remove(conteudo.get());
+         }else{
+             System.out.println("você não está inscrito neste curso !");
+         }
     }
 
-    public void calcularTotalXP(){}
+    public double calcularTotalXP(){
+        return this.conteudosFinalizados
+                .stream()
+                .mapToDouble(conteudo -> conteudo.calcularXp())
+                .sum();
+    }
 
     public String getNome() {
         return nome;
